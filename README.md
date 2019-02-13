@@ -1,6 +1,6 @@
 # Yii2 AWS S3Client
 
-[![@raditzfarhan on Twitter](http://img.shields.io/badge/twitter-%40awsforphp-blue.svg?style=flat)](https://twitter.com/raditzfarhan)
+[![@raditzfarhan on Twitter](https://img.shields.io/badge/twitter-%40raditzfarhan-blue.svg?style=flat)](https://twitter.com/raditzfarhan)
 
 The **Yii2 AWS S3Client** is a wrapper for AWS S#Client SDK for PHP. 
 
