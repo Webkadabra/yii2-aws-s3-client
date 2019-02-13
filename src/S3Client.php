@@ -61,7 +61,7 @@ class S3Client extends Component
     }
 
     /*
-     *  The put method may be used to store raw file contents on a disk.
+     *  Store raw file contents on bucket.
      */
     public function put($file, $content){
         
@@ -104,7 +104,7 @@ class S3Client extends Component
     }
 
     /*
-     *  Move an existing file to a new location.
+     *  Rename or move an existing file to a new location.
      */
     public function move($old_file, $new_file){
         if(self::copy($old_file, $new_file)){
@@ -115,6 +115,9 @@ class S3Client extends Component
         }
     }
 
+    /*
+     *  Get a new file name if there's file with same name
+     */
     private function getNewFile($new_file){
         $new_file_full_path = 's3://'.$this->bucket.'/'.$new_file;
         $store_file_path = $new_file;
@@ -136,6 +139,9 @@ class S3Client extends Component
         return $store_file_path;
     }
 
+    /*
+     *  Just for lulz
+     */
     public static function kamen()
     {
         return 'Henshin!!!';

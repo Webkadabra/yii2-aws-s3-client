@@ -2,7 +2,7 @@
 
 [![@raditzfarhan on Twitter](https://img.shields.io/badge/twitter-%40raditzfarhan-blue.svg?style=flat)](https://twitter.com/raditzfarhan)
 
-The **Yii2 AWS S3Client** is a wrapper for AWS S#Client SDK for PHP. 
+The **Yii2 AWS S3Client** is a wrapper for AWS S3Client SDK for PHP. 
 
 ## Installation
 
@@ -33,40 +33,40 @@ to the ```require``` section of your `composer.json` file.
 
 Add this code below to your main config and your are ready to go.
 ```php
-	// add this in your component section
-	's3Client' => [           
-            'class' => 'farhan928\AwsS3\S3Client',
-            'key' => 'YOUR_AWS_KEY',
-            'secret' => 'YOUR_AWS_SECRET',            
-            'bucket' => 'YOUR_BUKCET',            
-    ],
+// add this in your component section
+'s3Client' => [           
+        'class' => 'farhan928\AwsS3\S3Client',
+        'key' => 'YOUR_AWS_KEY',
+        'secret' => 'YOUR_AWS_SECRET',            
+        'bucket' => 'YOUR_BUKCET',            
+],
 ```
 
 ## Examples
 
 ### Get object URL
 ```php
-    Yii::$app->s3Client->url('file.png');
+Yii::$app->s3Client->url('file.png');
 ```
 
 ### Generate and get temporary URL
 ```php
-    Yii::$app->s3Client->temporaryUrl('file.png', 5); //second argument is the duration in minute
+Yii::$app->s3Client->temporaryUrl('file.png', 5); //second argument is the duration in minute
 ```
 
 ### Upload raw file contents on bucket
 ```php
-    Yii::$app->s3Client->put('file.png', file_get_contents('https://i.imgur.com/hAjCMan.jpg'))
+Yii::$app->s3Client->put('file.png', file_get_contents('https://i.imgur.com/hAjCMan.jpg'))
 ```
 
 ### Copy object to new location
 ```php
-    Yii::$app->s3Client->copy('old.png', 'file/new.png')
+Yii::$app->s3Client->copy('old.png', 'file/new.png')
 ```
 
 ### Move object to new location
 ```php
-    Yii::$app->s3Client->move('old.png', 'file/new.png')
+Yii::$app->s3Client->move('old.png', 'file/new.png')
 ```
 
 ## License
