@@ -1,0 +1,29 @@
+{
+    "name": "farhan928/yii2-aws-s3-client",
+    "description": "Yii2 wrapper extension for aws sdk s3 client",
+    "type": "yii2-extension",
+    "keywords": [
+        "yii2",
+        "extension",
+        "s3",
+        "s3 client",
+        "aws",
+        "aws s3"        
+    ],
+    "require": {
+        "aws/aws-sdk-php": "^3.87"
+    },
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Farhan",
+            "email": "ahmad.farhan@globaltium.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "farhan928\\AwsS3\\": "src"
+        }
+    }
+}
