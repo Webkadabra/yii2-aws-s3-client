@@ -35,10 +35,10 @@ Add this code below to your main config and your are ready to go.
 ```php
 	// add this in your component section
 	's3Client' => [           
-        'class' => 'farhan928\AwsS3\S3Client',
-        'key' => 'YOUR_AWS_KEY',
-        'secret' => 'YOUR_AWS_SECRET',            
-        'bucket' => 'YOUR_BUKCET',            
+            'class' => 'farhan928\AwsS3\S3Client',
+            'key' => 'YOUR_AWS_KEY',
+            'secret' => 'YOUR_AWS_SECRET',            
+            'bucket' => 'YOUR_BUKCET',            
     ],
 ```
 
