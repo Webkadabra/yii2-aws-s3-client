@@ -4,7 +4,7 @@ namespace farhan928\AwsS3;
 use Yii;
 use yii\base\Component;
 use Aws\S3\S3Client as AwsS3Client;
-use Aws\Exception\AwsException;
+use Aws\S3\Exception\S3Exception;
 
 class S3Client extends Component
 {
@@ -71,14 +71,18 @@ class S3Client extends Component
         // get file type png. jpg
         // $ext = $mime_type ? str_replace('image/', '', $mime_type) : 'png';
         
-        return $this->s3Client->putObject([
-            'ACL' => 'public-read',
-            'Body' => $content,
-            'Bucket' => $this->bucket,
-            'Key' => $file,
-            'ContentType' => $mime_type,
-            'ServerSideEncryption' => 'AES256',
-        ]);
+        try {
+            return $this->s3Client->putObject([
+                'ACL' => 'public-read',
+                'Body' => $content,
+                'Bucket' => $this->bucket,
+                'Key' => $file,
+                'ContentType' => $mime_type,
+                'ServerSideEncryption' => 'AES256',
+            ]);
+        } catch (S3Exception $e) {
+            return false;
+        }        
     }
 
     /*
@@ -93,26 +97,36 @@ class S3Client extends Component
         
         $new_file = self::getNewFile($new_file); 
         
-        return $this->s3Client->copyObject([
-            'ACL' => 'public-read',
-            'Bucket' => $this->bucket,
-            'CopySource' => '/'.$this->bucket.'/'.$old_file,
-            'Key' => "{$new_file}",
-            'ContentType' => $object->get('ContentType'),
-            'ServerSideEncryption' => 'AES256',
-        ]);
+        try {
+            return $this->s3Client->copyObject([
+                'ACL' => 'public-read',
+                'Bucket' => $this->bucket,
+                'CopySource' => '/'.$this->bucket.'/'.$old_file,
+                'Key' => "{$new_file}",
+                'ContentType' => $object->get('ContentType'),
+                'ServerSideEncryption' => 'AES256',
+            ]);
+        } catch (S3Exception $e) {
+            return false;
+        }  
     }
 
     /*
      *  Rename or move an existing file to a new location.
      */
     public function move($old_file, $new_file){
-        if(self::copy($old_file, $new_file)){
-            return $this->s3Client->deleteObject([               
-                'Bucket' => $this->bucket,                
-                'Key' => $old_file,                
-            ]);
-        }
+        try {
+            if (self::copy($old_file, $new_file)){
+                return $this->s3Client->deleteObject([               
+                    'Bucket' => $this->bucket,                
+                    'Key' => $old_file,                
+                ]);
+            } else {
+                return false;
+            }
+        } catch (S3Exception $e) {
+            return false;
+        }  
     }
 
     /*
