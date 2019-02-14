@@ -1,5 +1,5 @@
-Copyright (c) 2019, Ahmad Farhan 
-https://twitter.com/raditzfarhan
+Copyright (c) 2019, Ahmad Farhan  
+https://twitter.com/raditzfarhan  
 All rights reserved.  
 
 Redistribution and use in source and binary forms, with or without modification,
