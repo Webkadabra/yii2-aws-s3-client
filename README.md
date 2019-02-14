@@ -18,13 +18,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-$ composer require farhan928/yii2-aws-s3-client "*"
+$ composer require farhan928/yii2-aws-s3-client "@dev"
 ```
 
 or add
 
 ```
-"farhan928/yii2-aws-s3-client": "*"
+"farhan928/yii2-aws-s3-client": "@dev"
 ```
 
 to the ```require``` section of your `composer.json` file.
