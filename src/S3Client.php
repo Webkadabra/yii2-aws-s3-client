@@ -61,7 +61,7 @@ class S3Client extends Component
     }
 
     /*
-     *  Store raw file contents on bucket.
+     *  Store raw file contents to bucket.
      */
     public function put($file, $content){
         
@@ -83,6 +83,25 @@ class S3Client extends Component
         } catch (S3Exception $e) {
             return false;
         }        
+    }
+
+    /*
+     *  Store from file resource to bucket.
+     */
+    public function store($file, $resource){
+       
+        try {
+            return $this->s3Client->putObject([
+                'ACL' => 'public-read',              
+                'SourceFile' => $resource->tempName,
+                'Bucket' => $this->bucket,
+                'Key' => $file,
+                'ContentType' => $resource->type,
+                'ServerSideEncryption' => 'AES256',
+            ]);
+        } catch (S3Exception $e) {
+            return false;
+        }      
     }
 
     /*
