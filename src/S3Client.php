@@ -149,6 +149,25 @@ class S3Client extends Component
     }
 
     /*
+     *  Check if file exists.
+     */
+    public function fileExists($file){
+        $file_full_path = 's3://'.$this->bucket.'/'.$file;
+        
+        $this->s3Client->registerStreamWrapper();
+
+        try {
+            if (file_exists($file_full_path) && is_file($file_full_path)){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (S3Exception $e) {
+            return false;
+        }  
+    }
+
+    /*
      *  Get a new file name if there's file with same name
      */
     private function getNewFile($new_file){
