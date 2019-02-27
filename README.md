@@ -18,16 +18,20 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-$ composer require farhan928/yii2-aws-s3-client "@dev"
+$ composer require farhan928/yii2-aws-s3-client "^1.0.0"
 ```
 
 or add
 
 ```
-"farhan928/yii2-aws-s3-client": "@dev"
+"farhan928/yii2-aws-s3-client": "^1.0.0"
 ```
 
 to the ```require``` section of your `composer.json` file.
+
+## Release Changes
+
+> NOTE: Refer the [CHANGE LOG](https://github.com/farhan928/yii2-aws-s3-client/blob/master/CHANGE.md) for details on changes to various releases.
 
 ## Usage
 
@@ -67,6 +71,15 @@ Yii::$app->s3Client->copy('old.png', 'file/new.png')
 ### Move object to new location
 ```php
 Yii::$app->s3Client->move('old.png', 'file/new.png')
+```
+
+### Get all files from a directory
+```php
+// get all files
+Yii::$app->s3Client->files('path/to/your/folder/');
+
+// get certain type of files
+Yii::$app->s3Client->files('path/to/your/folder/', ['jpg', 'png']);
 ```
 
 ## License
