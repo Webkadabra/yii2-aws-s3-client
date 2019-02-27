@@ -168,6 +168,49 @@ class S3Client extends Component
     }
 
     /*
+     *  Get all files from a path
+     */
+    public function files($path = '', $extension = []){
+        $files = [];
+        
+        if ($path) {
+            // remove slash at beginning
+            if(substr($path, 0, 1) == '/') {
+                $path = ltrim($path, '/');
+            }
+
+            // add slash at the end 
+            if(substr($path, -1) != '/') {
+                $path .= '/';
+            }
+        }        
+        
+        $dir = "s3://".$this->bucket."/".$path;
+
+        $this->s3Client->registerStreamWrapper();
+
+        if (is_dir($dir) && ($dh = opendir($dir))) {
+            while (($file = readdir($dh)) !== false) {
+                $ext = pathinfo($dir . $file, PATHINFO_EXTENSION);
+                //echo "filename: {$file}, filetype: " . filetype($dir . $file) . " extension: " . $ext .  "<br/>";
+                
+                if (filetype($dir . $file) == 'file') {
+                    if (count($extension) > 0){
+                        if ( in_array($ext, $extension) ) {
+                            $files[] = $file;
+                        }
+                    } else {
+                        $files[] = $file;
+                    }                    
+                }
+            }
+            closedir($dh);  
+        }
+
+        return $files;
+    }
+
+    /*
      *  Get a new file name if there's file with same name
      */
     private function getNewFile($new_file){
